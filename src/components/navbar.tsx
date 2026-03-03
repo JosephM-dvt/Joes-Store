@@ -42,6 +42,12 @@ export const Navbar = () => {
             color="foreground"
             href="/"
           >
+            <img
+              alt="JOESALOT"
+              className="w-6 h-6"
+              color="white"
+              src="/storeLogo.svg"
+            />
             <p className="font-bold text-inherit">JOESALOT</p>
           </Link>
         </NavbarBrand>
