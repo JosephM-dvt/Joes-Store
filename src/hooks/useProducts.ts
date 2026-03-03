@@ -1,12 +1,37 @@
-import { fetchProducts } from "../services/api";
-import { Product } from "../cart/types";
+import type { Product } from "@/cart/types";
 
-let productPromise: Promise<Product[]> | null = null;
+import { fetchProducts } from "@/services/api";
+
+type Status = "pending" | "success" | "error";
+
+let status: Status = "pending";
+let result: Product[] | Error;
+let promise: Promise<void> | null = null;
+
+function load() {
+  if (!promise) {
+    promise = fetchProducts()
+      .then((data) => {
+        status = "success";
+        result = data;
+      })
+      .catch((err: Error) => {
+        status = "error";
+        result = err;
+      });
+  }
+}
 
 export function useProducts(): Product[] {
-  if (!productPromise) {
-    productPromise = fetchProducts();
+  load();
+
+  if (status === "pending") {
+    throw promise;
   }
 
-  throw productPromise;
+  if (status === "error") {
+    throw result;
+  }
+
+  return result as Product[];
 }
