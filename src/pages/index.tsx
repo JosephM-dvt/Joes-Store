@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import DefaultLayout from "@/layouts/default";
 import ProductList from "@/components/ProductList";
+import CartSummary from "@/components/CartSummary";
 
 export default function IndexPage() {
   return (
@@ -10,7 +11,7 @@ export default function IndexPage() {
         <h1 className="text-2xl font-bold text-center sm:text-left">
           Welcome to Joe&apos;s Store
         </h1>
-
+        <CartSummary />
         <Suspense fallback={<p>Loading products...</p>}>
           <ProductList />
         </Suspense>
