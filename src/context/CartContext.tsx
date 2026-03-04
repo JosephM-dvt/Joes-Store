@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
 
-import { cartReducer, initialCartState } from "./cartReducer";
-import { CartState, CartAction } from "./types";
+import { cartReducer, initialCartState } from "../cart/cartReducer";
+import { CartState, CartAction } from "../types/cartTypes";
 
 const CartStateContext = createContext<CartState | null>(null);
 const CartDispatchContext = createContext<React.Dispatch<CartAction> | null>(

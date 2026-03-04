@@ -1,4 +1,4 @@
-import { CartState, CartAction } from "./types";
+import { CartState, CartAction } from "../types/cartTypes";
 
 export const initialCartState: CartState = {
   items: [],

@@ -1,6 +1,6 @@
 import { Card } from "@heroui/react";
 
-import { useCart } from "../cart/CartContext";
+import { useCart } from "../context/CartContext";
 
 export default function CartSummary() {
   const { items } = useCart();

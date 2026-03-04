@@ -1,4 +1,4 @@
-import { ApiProduct, Product } from "../cart/types";
+import { ApiProduct, Product } from "../types/cartTypes";
 
 function mapProduct(apiProduct: ApiProduct): Product {
   return {
