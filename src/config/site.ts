@@ -13,27 +13,15 @@ export const siteConfig = {
       label: "Cart",
       href: "/cart",
     },
-    {
-      label: "Account",
-      href: "/account",
-    },
   ],
   navMenuItems: [
     {
-      label: "Profile",
-      href: "/profile",
-    },
-    {
-      label: "Orders",
-      href: "/orders",
+      label: "Home",
+      href: "/",
     },
     {
       label: "Cart",
       href: "/cart",
-    },
-    {
-      label: "Logout",
-      href: "/logout",
     },
   ],
 };

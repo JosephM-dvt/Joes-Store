@@ -13,7 +13,7 @@ export default function CartSummary() {
   );
 
   return (
-    <Card className="p-4 m-3 sticky top-2">
+    <Card className="p-4 m-3 sticky top-15 z-100">
       <h2 className="font-bold text-lg">Cart Summary</h2>
       <p>Items: {totalItems}</p>
       <p>Total: R{totalPrice.toFixed(2)}</p>
