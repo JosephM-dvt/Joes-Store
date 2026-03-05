@@ -1,5 +1,5 @@
 import { Card, Button, Image, Divider } from "@heroui/react";
-import { Link } from "@heroui/link";
+import { Link as RouterLink } from "react-router-dom";
 
 import { useCart, useCartDispatch } from "@/context/CartContext";
 import DefaultLayout from "@/layouts/default";
@@ -23,7 +23,7 @@ export default function CartPage() {
         {items.length === 0 && (
           <Card className="p-6 text-center">
             <p className="mb-4">Your cart is empty</p>
-            <Button as={Link} color="primary" href="/">
+            <Button as={RouterLink} color="primary" to="/">
               Continue Shopping
             </Button>
           </Card>
@@ -46,7 +46,7 @@ export default function CartPage() {
                   <div className="flex-1 text-center sm:text-left">
                     <p className="font-semibold line-clamp-2">{item.title}</p>
                     <p className="text-primary font-bold">
-                      ${item.price.toFixed(2)}
+                      R{item.price.toFixed(2)}
                     </p>
                   </div>
 
@@ -102,10 +102,15 @@ export default function CartPage() {
               <div className="flex flex-col gap-2">
                 <p>Items: {totalItems}</p>
                 <p className="text-xl font-bold">
-                  Total: ${totalPrice.toFixed(2)}
+                  Total: R{totalPrice.toFixed(2)}
                 </p>
 
-                <Button className="mt-3" color="primary" size="lg">
+                <Button
+                  className="mt-3"
+                  color="primary"
+                  size="lg"
+                  onPress={() => dispatch({ type: "CLEAR_CART" })}
+                >
                   Checkout
                 </Button>
               </div>
