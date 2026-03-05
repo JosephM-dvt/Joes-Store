@@ -1,4 +1,4 @@
-import { ApiProduct, Product } from "../cart/types";
+import { ApiProduct, Product } from "../types/cartTypes";
 
 function mapProduct(apiProduct: ApiProduct): Product {
   return {
@@ -10,7 +10,7 @@ function mapProduct(apiProduct: ApiProduct): Product {
 }
 
 export async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch("https://fakestoreapi.com/products?limit=8");
+  const res = await fetch("https://fakestoreapi.com/products?limit=50");
 
   if (!res.ok) {
     throw new Error("Failed to fetch products");

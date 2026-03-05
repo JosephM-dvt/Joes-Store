@@ -16,8 +16,10 @@ import { Link as RouterLink } from "react-router-dom";
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { SearchIcon } from "@/components/icons";
+import { useUI } from "@/context/UIContext";
 
 export const Navbar = () => {
+  const { search, setSearch } = useUI();
   const searchInput = (
     <Input
       aria-label="Search"
@@ -31,6 +33,8 @@ export const Navbar = () => {
         <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
       }
       type="search"
+      value={search}
+      onValueChange={setSearch}
     />
   );
 
@@ -87,10 +91,11 @@ export const Navbar = () => {
 
       <NavbarMenu>
         {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        <div className="mx-4 mt-2 flex flex-col gap-2 z-10000">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
+                as={RouterLink}
                 color={
                   index === 2
                     ? "primary"
@@ -98,8 +103,8 @@ export const Navbar = () => {
                       ? "danger"
                       : "foreground"
                 }
-                href="#"
                 size="lg"
+                to={item.href}
               >
                 {item.label}
               </Link>

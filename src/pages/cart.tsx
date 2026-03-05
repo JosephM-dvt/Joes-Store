@@ -1,7 +1,7 @@
 import { Card, Button, Image, Divider } from "@heroui/react";
 import { Link } from "@heroui/link";
 
-import { useCart, useCartDispatch } from "@/cart/CartContext";
+import { useCart, useCartDispatch } from "@/context/CartContext";
 import DefaultLayout from "@/layouts/default";
 
 export default function CartPage() {

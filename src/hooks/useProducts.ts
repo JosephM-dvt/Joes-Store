@@ -1,4 +1,4 @@
-import type { Product } from "@/cart/types";
+import type { Product } from "@/types/cartTypes";
 
 import { fetchProducts } from "@/services/api";
 
