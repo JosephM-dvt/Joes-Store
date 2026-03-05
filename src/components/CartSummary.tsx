@@ -2,6 +2,8 @@ import { Card } from "@heroui/react";
 
 import { useCart } from "../context/CartContext";
 
+import { AnimatedRGBBorder } from "./animated-rgb-border";
+
 export default function CartSummary() {
   const { items } = useCart();
 
@@ -13,10 +15,12 @@ export default function CartSummary() {
   );
 
   return (
-    <Card className="p-4 m-3 sticky top-15 z-100">
-      <h2 className="font-bold text-lg">Cart Summary</h2>
-      <p>Items: {totalItems}</p>
-      <p>Total: R{totalPrice.toFixed(2)}</p>
-    </Card>
+    <AnimatedRGBBorder className="sticky top-15 z-10000">
+      <Card className="p-4 ">
+        <h2 className="font-bold text-lg">Cart Summary</h2>
+        <p>Items: {totalItems}</p>
+        <p>Total: R{totalPrice.toFixed(2)}</p>
+      </Card>
+    </AnimatedRGBBorder>
   );
 }
