@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { Spinner } from "@heroui/spinner";
 
 import DefaultLayout from "@/layouts/default";
 import ProductList from "@/components/ProductList";
@@ -11,8 +12,14 @@ export default function IndexPage() {
         <h1 className="text-2xl font-bold text-center sm:text-left">
           Welcome to Joe&apos;s Store
         </h1>
-        <CartSummary />
-        <Suspense fallback={<p>Loading products...</p>}>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center min-h-[60vh] w-full">
+              <Spinner size="lg" />
+            </div>
+          }
+        >
+          <CartSummary />
           <ProductList />
         </Suspense>
       </div>

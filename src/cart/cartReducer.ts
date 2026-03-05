@@ -48,6 +48,8 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
           )
           .filter((item) => item.quantity > 0),
       };
+    case "CLEAR_CART":
+      return initialCartState;
 
     default:
       return state;
