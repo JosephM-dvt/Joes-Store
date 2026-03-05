@@ -1,50 +1,139 @@
-# Vite & HeroUI Template
 
-This is a template for creating applications using Vite and HeroUI (v2).
+# Joe's Store 🛒
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/vite-template)
+A modern shopping cart web application built with **React, TypeScript, Context API, and Reducers**.  
 
-## Technologies Used
+The project uses the **Fake Store API** for product data and **HeroUI** as the component library.
 
-- [Vite](https://vitejs.dev/guide/)
-- [HeroUI](https://heroui.com)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Framer Motion](https://www.framer.com/motion)
+---
 
-## How to Use
+## Features
 
-To clone the project, run the following command:
+- Product listing fetched from Fake Store API
+- Add items to cart
+- Remove items from cart
+- Increase / decrease item quantity
+- Cart summary showing:
+  - Total items
+  - Total price
+- Product detail page
+- Search filter for products
+- Sorting options
+- Responsive mobile-first layout
+- Global state using **Reducer + Context**
+- Custom hooks for state access
+
+---
+
+## Tech Stack
+
+- **React**
+- **TypeScript**
+- **Vite**
+- **React Router**
+- **HeroUI**
+- **TailwindCSS**
+- **Fake Store API**
+
+API Used
+
+
+[https://fakestoreapi.com/](https://fakestoreapi.com/)
+
+
+---
+
+## Architecture
+
+The application follows a **Reducer + Context architecture** for state management.
+
+### Cart State
+
+All cart logic is handled in a **Reducer**, which manages:
+
+- Adding items
+- Removing items
+- Updating quantities
+- Calculating totals
+
+State is provided globally through the **CartProvider**.
+
+### Context
+
+Two contexts are exposed:
+
+- `useCart()` – access cart state
+- `useCartDispatch()` – dispatch actions to the reducer
+
+This removes the need for **prop drilling**.
+
+---
+
+## Screenshots
+
+### Home Page (Desktop)
+
+
+![alt text](<Screenshot 2026-03-05 at 16.51.12.png>) 
+---
+
+### Home Page (Mobile)
+![alt text](<Screenshot 2026-03-05 at 16.56.46.png>) 
+
+---
+
+### Cart View (Desktop)
+![alt text](<Screenshot 2026-03-05 at 16.52.10.png>) 
+
+
+---
+
+### Cart View (Mobile)
+![alt text](<Screenshot 2026-03-05 at 16.57.25.png>)
+![alt text](<Screenshot 2026-03-05 at 16.57.29.png>) 
+
+
+---
+
+### Product View (Desktop)
+![alt text](<Screenshot 2026-03-05 at 16.52.25.png>)
+
+
+---
+
+### Product View (Mobile)
+![alt text](<Screenshot 2026-03-05 at 16.58.20.png>) 
+![alt text](<Screenshot 2026-03-05 at 16.58.13.png>) 
+
+---
+
+## Installation
+
+Clone the repository:
 
 ```bash
-git clone https://github.com/heroui-inc/vite-template.git
-```
+git clone https://github.com/JosephM-dvt/Joes-Store
+````
 
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Run the development server
+Run the development server:
 
 ```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
+---
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+## Build
+
+To create a production build:
 
 ```bash
-public-hoist-pattern[]=*@heroui/*
+npm run build
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/heroui-inc/vite-template/blob/main/LICENSE).
