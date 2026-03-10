@@ -1,4 +1,4 @@
-import type { Product } from "@/types/cartTypes";
+import type { Product } from "@/features/cart/cartTypes";
 
 import { Link as RouterLink } from "react-router-dom";
 import { useMemo, useState } from "react";
@@ -12,9 +12,11 @@ import {
 } from "@heroui/react";
 import { Link } from "@heroui/link";
 
+import { addToCart } from "../cart/cartSlice";
+
 import { useProducts } from "@/hooks/useProducts";
-import { useCartDispatch } from "@/context/CartContext";
 import { useUI } from "@/context/UIContext";
+import { useAppDispatch } from "@/app/hooks";
 
 type SortOption =
   | "price-asc"
@@ -25,7 +27,7 @@ type SortOption =
 
 export default function ProductList() {
   const products = useProducts();
-  const dispatch = useCartDispatch();
+  const dispatch = useAppDispatch();
 
   const [sort, setSort] = useState<SortOption>("none");
   const { search } = useUI();
@@ -110,10 +112,7 @@ export default function ProductList() {
                 className="mt-auto"
                 color="primary"
                 onPress={() => {
-                  dispatch({
-                    type: "ADD_TO_CART",
-                    payload: product,
-                  });
+                  dispatch(addToCart(product));
                 }}
               >
                 Add to Cart

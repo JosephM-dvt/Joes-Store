@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import { Spinner } from "@heroui/spinner";
 
 import DefaultLayout from "@/layouts/default";
-import ProductList from "@/components/ProductList";
-import CartSummary from "@/components/CartSummary";
+import ProductList from "@/features/products/ProductList";
+import CartSummary from "@/features/cart/CartSummary";
 
 export default function IndexPage() {
   return (

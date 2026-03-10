@@ -1,11 +1,13 @@
 import { Card } from "@heroui/react";
 
-import { useCart } from "../context/CartContext";
+import { AnimatedRGBBorder } from "../../components/animated-rgb-border";
 
-import { AnimatedRGBBorder } from "./animated-rgb-border";
+import { selectCart } from "./cartSlice";
+
+import { useAppSelector } from "@/app/hooks";
 
 export default function CartSummary() {
-  const { items } = useCart();
+  const items = useAppSelector(selectCart);
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 

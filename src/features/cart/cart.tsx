@@ -1,12 +1,20 @@
 import { Card, Button, Image, Divider } from "@heroui/react";
 import { Link as RouterLink } from "react-router-dom";
 
-import { useCart, useCartDispatch } from "@/context/CartContext";
+import {
+  selectCart,
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+  removeFromCart,
+} from "./cartSlice";
+
 import DefaultLayout from "@/layouts/default";
+import { useAppSelector, useAppDispatch } from "@/app/hooks";
 
 export default function CartPage() {
-  const { items } = useCart();
-  const dispatch = useCartDispatch();
+  const items = useAppSelector(selectCart);
+  const dispatch = useAppDispatch();
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -54,12 +62,7 @@ export default function CartPage() {
                     <Button
                       size="sm"
                       variant="flat"
-                      onPress={() =>
-                        dispatch({
-                          type: "DECREASE_QTY",
-                          payload: item.id,
-                        })
-                      }
+                      onPress={() => dispatch(decreaseQuantity(item.id))}
                     >
                       −
                     </Button>
@@ -69,12 +72,7 @@ export default function CartPage() {
                     <Button
                       size="sm"
                       variant="flat"
-                      onPress={() =>
-                        dispatch({
-                          type: "INCREASE_QTY",
-                          payload: item.id,
-                        })
-                      }
+                      onPress={() => dispatch(increaseQuantity(item.id))}
                     >
                       +
                     </Button>
@@ -83,12 +81,7 @@ export default function CartPage() {
                   <Button
                     color="danger"
                     variant="light"
-                    onPress={() =>
-                      dispatch({
-                        type: "REMOVE_FROM_CART",
-                        payload: item.id,
-                      })
-                    }
+                    onPress={() => dispatch(removeFromCart(item.id))}
                   >
                     Remove
                   </Button>
@@ -109,7 +102,7 @@ export default function CartPage() {
                   className="mt-3"
                   color="primary"
                   size="lg"
-                  onPress={() => dispatch({ type: "CLEAR_CART" })}
+                  onPress={() => dispatch(clearCart())}
                 >
                   Checkout
                 </Button>

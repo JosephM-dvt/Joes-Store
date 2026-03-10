@@ -1,17 +1,20 @@
+import type { Product } from "@/features/cart/cartTypes";
+
 import { useParams } from "react-router-dom";
 import { Card, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { Button } from "@heroui/button";
 
 import { useProducts } from "@/hooks/useProducts";
-import { useCartDispatch } from "@/context/CartContext";
 import DefaultLayout from "@/layouts/default";
-import CartSummary from "@/components/CartSummary";
+import CartSummary from "@/features/cart/CartSummary";
+import { useAppDispatch } from "@/app/hooks";
+import { addToCart } from "@/features/cart/cartSlice";
 
 function Product() {
   const products = useProducts();
   const { id } = useParams();
-  const dispatch = useCartDispatch();
+  const dispatch = useAppDispatch();
 
   const product = products.find((p) => p.id === Number(id));
 
@@ -22,13 +25,6 @@ function Product() {
       </div>
     );
   }
-
-  const handleAddToCart = () => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: product,
-    });
-  };
 
   return (
     <DefaultLayout>
@@ -64,7 +60,9 @@ function Product() {
                 className="w-full sm:w-auto"
                 color="primary"
                 size="lg"
-                onPress={handleAddToCart}
+                onPress={() => {
+                  dispatch(addToCart(product));
+                }}
               >
                 Add to Cart
               </Button>
