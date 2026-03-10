@@ -1,0 +1,79 @@
+import { useParams } from "react-router-dom";
+import { Card, CardBody, CardFooter } from "@heroui/card";
+import { Image } from "@heroui/image";
+import { Button } from "@heroui/button";
+
+import { useProducts } from "@/hooks/useProducts";
+import { useCartDispatch } from "@/context/CartContext";
+import DefaultLayout from "@/layouts/default";
+import CartSummary from "@/components/CartSummary";
+
+function Product() {
+  const products = useProducts();
+  const { id } = useParams();
+  const dispatch = useCartDispatch();
+
+  const product = products.find((p) => p.id === Number(id));
+
+  if (!product) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <p className="text-lg">Product not found</p>
+      </div>
+    );
+  }
+
+  const handleAddToCart = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: product,
+    });
+  };
+
+  return (
+    <DefaultLayout>
+      <div className="flex flex-col justify-end mb-4">
+        <CartSummary />
+        <div className="w-full mt-6">
+          <Card className="grid gap-6 md:grid-cols-2 p-4">
+            <CardBody className="flex justify-center items-center">
+              <Image
+                alt={product.title}
+                className="object-contain max-h-[400px]"
+                src={product.image}
+              />
+            </CardBody>
+
+            <CardFooter className="flex flex-col items-start gap-4">
+              <h1 className="text-2xl font-bold">{product.title}</h1>
+
+              <p className="text-default-500">{product.category}</p>
+
+              <p className="text-default-600">{product.description}</p>
+
+              <div className="flex items-center gap-2">
+                <span className="text-lg font-semibold">
+                  R{product.price.toFixed(2)}
+                </span>
+                <span className="text-sm text-default-500">
+                  ⭐ {product.rating.rate} ({product.rating.count} reviews)
+                </span>
+              </div>
+
+              <Button
+                className="w-full sm:w-auto"
+                color="primary"
+                size="lg"
+                onPress={handleAddToCart}
+              >
+                Add to Cart
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+      </div>
+    </DefaultLayout>
+  );
+}
+
+export default Product;
