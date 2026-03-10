@@ -1,17 +1,11 @@
-import type { Product } from "@/features/cart/cartTypes";
-
 import { useGetProductsQuery } from "@/services/productsApi";
 
-export function useProducts(): Product[] {
-  const { data, error, isLoading } = useGetProductsQuery();
+export function useProducts() {
+  const { data, isLoading, error } = useGetProductsQuery();
 
-  if (isLoading) {
-    throw new Promise(() => {});
-  }
-
-  if (error) {
-    throw error;
-  }
-
-  return data as Product[];
+  return {
+    products: data ?? [],
+    isLoading,
+    error,
+  };
 }

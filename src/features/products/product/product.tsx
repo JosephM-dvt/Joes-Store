@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Card, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { Button } from "@heroui/button";
+import { Spinner } from "@heroui/spinner";
 
 import { useProducts } from "@/hooks/useProducts";
 import DefaultLayout from "@/layouts/default";
@@ -12,10 +13,18 @@ import { useAppDispatch } from "@/app/hooks";
 import { addToCart } from "@/features/cart/cartSlice";
 
 function Product() {
-  const products = useProducts();
+  const { products, isLoading, error } = useProducts();
+
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />{" "}
+      </div>
+    );
+  if (error) return <div>Error loading product</div>;
   const product = products.find((p) => p.id === Number(id));
 
   if (!product) {

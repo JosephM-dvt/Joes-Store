@@ -9,6 +9,7 @@ import {
   Image,
   Select,
   SelectItem,
+  Spinner,
 } from "@heroui/react";
 import { Link } from "@heroui/link";
 
@@ -26,13 +27,14 @@ type SortOption =
   | "none";
 
 export default function ProductList() {
-  const products = useProducts();
+  const { products, isLoading, error } = useProducts();
   const dispatch = useAppDispatch();
 
   const [sort, setSort] = useState<SortOption>("none");
   const { search } = useUI();
 
   const filteredProducts = useMemo(() => {
+    if (!products) return [];
     let result = products;
 
     if (search.trim()) {
@@ -63,6 +65,17 @@ export default function ProductList() {
 
     return sorted;
   }, [products, sort, search]);
+
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  if (error) return <div>Error loading products</div>;
+  if (!products.length) return <div>No products found</div>;
+  if (filteredProducts.length === 0)
+    return <div>No products match your search</div>;
 
   return (
     <div className="flex flex-col gap-6">
