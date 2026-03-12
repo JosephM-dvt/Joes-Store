@@ -10,9 +10,14 @@ export function AnimatedRGBBorder({
   className = "",
 }: RGBBorderProps) {
   return (
-    <div className={`relative ${className} rounded-2xl overflow-clip`}>
-      <div className="absolute -inset-0.5 bg-[conic-gradient(from_180deg,#ef4444,#3b82f6,#ef4444,#3b82f6)] aspect-square scale-200 blur animate-[spin_15s_linear_infinite] " />
-      <div className="relative bg-background rounded-2xl m-1">{children}</div>
+    <div
+      className={`
+      w-full flex group items-center text-foreground hover:shadow-sm relative overflow-hidden rounded-2xl p-[1.25px]
+      ${className}
+    `}
+    >
+      <div className="absolute animate-[spin_10s_linear_infinite] inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#338EF7_0%,#F54180_50%,#338EF7_100%)]" />
+      <div className="relative bg-background rounded-2xl  w-full backdrop-blur-3xl ">{children}</div>
     </div>
   );
 }
